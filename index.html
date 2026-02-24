@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Portfólio — Kaique</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Gradient background layers -->
+  <div class="bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="grid"></div>
+  </div>
+
+  <!-- Top-right accessibility controls -->
+  <header class="topbar" aria-label="Acessibilidades">
+    <div class="search">
+      <button class="icon-btn" id="btnSearch" aria-label="Pesquisar">
+        🔍
+      </button>
+      <input
+        id="searchInput"
+        type="search"
+        placeholder="Pesquisar (ex: banco, api, css...)"
+        aria-label="Pesquisar por palavras-chave"
+      />
+    </div>
+
+    <div class="toggles">
+      <button class="icon-btn" id="btnTheme" aria-label="Alternar modo noturno">
+        🌙
+      </button>
+
+      <button class="icon-btn" id="btnLang" aria-label="Alterar idioma">
+        PT
+      </button>
+    </div>
+  </header>
+
+  <!-- Right hidden navbar (reveals on hover) -->
+  <aside class="nav-rail" aria-label="Menu lateral">
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#home" class="nav-item" data-i18n="nav_home" title="Home">🏠 <span>Home</span></a>
+      <a href="#cv" class="nav-item" data-i18n="nav_cv" title="Currículo">📄 <span>Currículo</span></a>
+      <a href="#projects" class="nav-item" data-i18n="nav_projects" title="Projetos">🧩 <span>Projetos</span></a>
+      <a href="#studies" class="nav-item" data-i18n="nav_studies" title="Estudos/Pesquisas">📚 <span>Estudos</span></a>
+      <a href="#contact" class="nav-item" data-i18n="nav_contact" title="Contato">✉️ <span>Contato</span></a>
+    </nav>
+  </aside>
+
+  <main class="container">
+    <!-- HOME -->
+    <section id="home" class="section hero" data-search-scope="home">
+      <div class="hero-left">
+        <div class="avatar-wrap" aria-label="Foto do Kaique">
+          <!-- Troque src pela sua foto -->
+          <img class="avatar" src="assets/minha-foto.jpg" alt="Foto do Kaique" onerror="this.style.display='none'; this.parentElement.classList.add('avatar-fallback')"/>
+          <div class="avatar-fallback-inner">
+            <div class="initials">K</div>
+            <small data-i18n="avatar_hint">Adicione sua foto em /assets</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <h1 class="title">
+          <span data-i18n="hello">Olá, eu sou</span> <strong>Kaique</strong> 👋
+        </h1>
+
+        <p class="subtitle" data-i18n="subtitle">
+          Estudante de Análise e Desenvolvimento de Sistemas. Curto criar interfaces bonitas, sistemas bem organizados e projetos práticos.
+        </p>
+
+        <div class="pill-row" aria-label="Destaques rápidos">
+          <span class="pill" data-i18n="pill_1">Front-end</span>
+          <span class="pill" data-i18n="pill_2">Banco de Dados</span>
+          <span class="pill" data-i18n="pill_3">Projetos acadêmicos</span>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#projects" data-i18n="cta_projects">Ver projetos</a>
+          <a class="btn ghost" href="#cv" data-i18n="cta_cv">Ver currículo</a>
+        </div>
+
+        <div class="featured">
+          <div class="section-head">
+            <h2 data-i18n="featured_title">Projetos em destaque</h2>
+            <p class="muted" data-i18n="featured_sub">Passe o mouse para pré-visualizar.</p>
+          </div>
+
+          <div class="card-grid">
+            <!-- CARD 1 -->
+            <article class="card project" data-tags="web front-end html css" data-title="Eccos Transporte" tabindex="0">
+              <div class="card-media" style="--img:url('assets/projeto1.jpg')"></div>
+              <div class="card-body">
+                <h3>Eccos Transporte</h3>
+                <p data-i18n="p1_desc">Conceito de logística eco-friendly com foco em experiência e operação.</p>
+              </div>
+              <button class="card-overlay" data-preview="Eccos Transporte" data-i18n="preview_btn">Pré-visualizar</button>
+            </article>
+
+            <!-- CARD 2 -->
+            <article class="card project" data-tags="sistema crud banco sql" data-title="Laboratório de Exames" tabindex="0">
+              <div class="card-media" style="--img:url('assets/projeto2.jpg')"></div>
+              <div class="card-body">
+                <h3>Laboratório de Exames</h3>
+                <p data-i18n="p2_desc">Portal e captura de dados com estrutura organizada e fluxo simples.</p>
+              </div>
+              <button class="card-overlay" data-preview="Laboratório de Exames" data-i18n="preview_btn">Pré-visualizar</button>
+            </article>
+
+            <!-- CARD 3 -->
+            <article class="card project" data-tags="jogo javascript ranking" data-title="SNIXEL" tabindex="0">
+              <div class="card-media" style="--img:url('assets/projeto3.jpg')"></div>
+              <div class="card-body">
+                <h3>SNIXEL</h3>
+                <p data-i18n="p3_desc">Jogo estilo snake com ranking e evolução — foco em diversão e UI.</p>
+              </div>
+              <button class="card-overlay" data-preview="SNIXEL" data-i18n="preview_btn">Pré-visualizar</button>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CURRÍCULO (sem abrir nova guia) -->
+    <section id="cv" class="section" data-search-scope="cv">
+      <div class="section-head">
+        <h2 data-i18n="cv_title">Visualização do currículo</h2>
+        <p class="muted" data-i18n="cv_sub">Aqui você pode exibir seu CV (PDF embutido) ou um resumo em cards.</p>
+      </div>
+
+      <div class="cv-wrap">
+        <div class="cv-actions">
+          <label class="file-label">
+            <input id="cvFile" type="file" accept="application/pdf"/>
+            <span data-i18n="cv_upload">Enviar PDF do currículo</span>
+          </label>
+          <a class="btn ghost" id="cvDownload" href="#" download="Curriculo-Kaique.pdf" aria-disabled="true" data-i18n="cv_download">Baixar PDF</a>
+        </div>
+
+        <div class="cv-viewer" role="region" aria-label="Visualização do currículo">
+          <iframe id="cvFrame" title="Currículo (PDF)" src="" loading="lazy"></iframe>
+          <div class="cv-empty" id="cvEmpty">
+            <p data-i18n="cv_empty">Envie um PDF para exibir aqui (ou coloque um arquivo em /assets/cv.pdf).</p>
+            <small class="muted">Dica: se você colocar <code>assets/cv.pdf</code>, ele carrega automaticamente.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJETOS -->
+    <section id="projects" class="section" data-search-scope="projects">
+      <div class="section-head">
+        <h2 data-i18n="projects_title">Projetos</h2>
+        <p class="muted" data-i18n="projects_sub">Lista completa dos projetos com descrição, stack e links.</p>
+      </div>
+
+      <div class="list-grid" id="projectsList">
+        <article class="list-card" data-tags="api node sql" data-title="API de Cadastros">
+          <h3>API de Cadastros</h3>
+          <p class="muted" data-i18n="proj_a">CRUD com autenticação, validações e banco relacional.</p>
+          <div class="chips">
+            <span class="chip">Node</span><span class="chip">SQL</span><span class="chip">REST</span>
+          </div>
+          <div class="links">
+            <a href="#" class="link">GitHub</a>
+            <a href="#" class="link">Demo</a>
+          </div>
+        </article>
+
+        <article class="list-card" data-tags="figma ux ui" data-title="Protótipo UX">
+          <h3>Protótipo UX</h3>
+          <p class="muted" data-i18n="proj_b">Fluxo de telas com foco em clareza, hierarquia e acessibilidade.</p>
+          <div class="chips">
+            <span class="chip">Figma</span><span class="chip">UX</span><span class="chip">UI</span>
+          </div>
+          <div class="links">
+            <a href="#" class="link">Figma</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ESTUDOS / PESQUISAS -->
+    <section id="studies" class="section" data-search-scope="studies">
+      <div class="section-head">
+        <h2 data-i18n="studies_title">Estudos / Pesquisas</h2>
+        <p class="muted" data-i18n="studies_sub">Coisas que você estudou e quer mostrar (ex: modelagem de dados, DER, normalização).</p>
+      </div>
+
+      <div class="list-grid">
+        <article class="list-card" data-tags="banco der normalizacao" data-title="Modelagem de Banco">
+          <h3 data-i18n="study_a_title">Modelagem de Banco de Dados</h3>
+          <p class="muted" data-i18n="study_a_desc">DER, dicionário de dados, regras de integridade e normalização.</p>
+          <div class="chips">
+            <span class="chip">DER</span><span class="chip">SQL</span><span class="chip">Normalização</span>
+          </div>
+        </article>
+
+        <article class="list-card" data-tags="arquitetura hardware organizacao" data-title="Arquitetura de Computadores">
+          <h3 data-i18n="study_b_title">Arquitetura & Organização</h3>
+          <p class="muted" data-i18n="study_b_desc">Conceitos de CPU, memória, instruções e fundamentos de sistemas.</p>
+          <div class="chips">
+            <span class="chip">CPU</span><span class="chip">Memória</span><span class="chip">Sistemas</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- CONTATO (rodapé) -->
+    <footer id="contact" class="section footer" data-search-scope="contact">
+      <div class="section-head">
+        <h2 data-i18n="contact_title">Contato</h2>
+        <p class="muted" data-i18n="contact_sub">Me chama em qualquer um desses canais.</p>
+      </div>
+
+      <div class="contact-row">
+        <a class="social" href="#" aria-label="Instagram">📷 <span>Instagram</span></a>
+        <a class="social" href="#" aria-label="WhatsApp">💬 <span>WhatsApp</span></a>
+        <a class="social" href="#" aria-label="LinkedIn">💼 <span>LinkedIn</span></a>
+        <a class="social" href="#" aria-label="GitHub">🐙 <span>GitHub</span></a>
+      </div>
+
+      <small class="muted">© <span id="year"></span> Kaique — Portfólio</small>
+    </footer>
+  </main>
+
+  <!-- Preview modal (in-page, no new tab) -->
+  <dialog class="modal" id="previewModal" aria-label="Pré-visualização do projeto">
+    <div class="modal-card">
+      <div class="modal-top">
+        <h3 id="previewTitle">Pré-visualizar</h3>
+        <button class="icon-btn" id="closeModal" aria-label="Fechar">✖</button>
+      </div>
+      <div class="modal-body">
+        <p class="muted" id="previewText">
+          Aqui você pode colocar imagens, links, descrição completa e tecnologias do projeto.
+        </p>
+
+        <div class="modal-actions">
+          <a class="btn primary" href="#projects" id="modalGoProjects" data-i18n="modal_projects">Ver seção de projetos</a>
+          <button class="btn ghost" id="modalClose" data-i18n="modal_close">Fechar</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
