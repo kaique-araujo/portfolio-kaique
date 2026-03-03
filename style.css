@@ -556,8 +556,3 @@ html[data-theme="dark"] .modal-actions .btn:hover{
   flex-wrap: wrap;
 }
 
-.theme-toggle svg,
-.theme-toggle i {
-  color: inherit !important;
-  fill: currentColor !important;
-}
