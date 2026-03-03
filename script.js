@@ -209,7 +209,9 @@ function openFromCard(card){
 
   idx = 0;
 
-  previewTitle.textContent = `Pré-visualizar — ${title}`;
+  const lang = localStorage.getItem("lang") || "pt";
+  const previewLabel = lang === "en" ? "Preview" : "Pré-visualizar";
+  previewTitle.textContent = `${previewLabel} — ${title}`;
   previewText.textContent  = desc;
 
   buildLinks(card);
@@ -300,3 +302,53 @@ $("#btnSearch")?.addEventListener("click", () => {
 
 // ============ Year ============
 $("#year").textContent = new Date().getFullYear();
+
+const navRail = document.querySelector(".nav-rail");
+const toggle = document.querySelector(".menu-toggle");
+
+if (navRail && toggle) {
+
+  toggle.addEventListener("click", (e) => {
+    e.stopPropagation();
+    navRail.classList.toggle("active");
+    toggle.classList.toggle("active");
+  });
+
+  document.querySelectorAll(".nav a").forEach(link => {
+    link.addEventListener("click", () => {
+      navRail.classList.remove("active");
+      toggle.classList.remove("active");
+    });
+  });
+
+  document.addEventListener("click", (e) => {
+    if (!navRail.contains(e.target) && !toggle.contains(e.target)) {
+      navRail.classList.remove("active");
+      toggle.classList.remove("active");
+    }
+  });
+
+}
+
+// Abrir / fechar botão
+toggle.addEventListener("click", (e) => {
+  e.stopPropagation();
+  navRail.classList.toggle("active");
+  toggle.classList.toggle("active");
+});
+
+// Fechar ao clicar em link
+document.querySelectorAll(".nav a").forEach(link => {
+  link.addEventListener("click", () => {
+    navRail.classList.remove("active");
+    toggle.classList.remove("active");
+  });
+});
+
+// Fechar ao clicar fora
+document.addEventListener("click", (e) => {
+  if (!navRail.contains(e.target) && !toggle.contains(e.target)) {
+    navRail.classList.remove("active");
+    toggle.classList.remove("active");
+  }
+});
