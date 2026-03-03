@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro de Usuário</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style> 
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #eaf4fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      color: #1b4f72;
+      margin-bottom: 25px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      background-color: #1b4f72;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #154360;
+    }
+  </style> <link rel="stylesheet" href="cadastro.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Cadastro de Usuário</h1>
+    <form id="formCadastro">
+      <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" required />
+      </div>
+      <div class="form-group">
+        <label for="cpf">CPF:</label>
+        <input type="text" id="cpf" maxlength="11" required />
+      </div>
+      <div class="form-group">
+        <label for="rg">RG:</label>
+        <input type="text" id="rg" maxlength="9" required />
+      </div>
+      <div class="form-group">
+        <label for="data-nascimento">Data de Nascimento:</label>
+        <input type="date" id="data-nascimento" required />
+      </div>
+      <div class="form-group">
+        <label for="login">Login:</label>
+        <input type="text" id="login" required />
+      </div>
+      <div class="form-group">
+        <label for="senha">Senha:</label>
+        <input type="password" id="senha" required />
+      </div>
+
+      <button type="button" onclick="gerarPDF()">Gerar PDF</button>
+    </form>
+  </div>
+
+  <script>
+    async function gerarPDF() {
+      const { jsPDF } = window.jspdf;
+
+      const nome = document.getElementById('nome').value;
+      const cpf = document.getElementById('cpf').value;
+      const rg = document.getElementById('rg').value;
+      const nascimento = document.getElementById('data-nascimento').value;
+      const login = document.getElementById('login').value;
+      const senha = document.getElementById('senha').value;
+
+      const doc = new jsPDF();
+
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(20);
+      doc.text("Cadastro de Usuário", 105, 30, { align: "center" });
+
+      doc.setLineWidth(0.5);
+      doc.line(20, 35, 190, 35);
+
+      doc.setFont("helvetica", "normal");
+      doc.setFontSize(12);
+
+      const dados = [
+        { label: "Nome", valor: nome },
+        { label: "CPF", valor: cpf },
+        { label: "RG", valor: rg },
+        { label: "Data de Nascimento", valor: nascimento },
+        { label: "Login", valor: login },
+        { label: "Senha", valor: senha }
+      ];
+
+      let y = 50;
+      dados.forEach(({ label, valor }) => {
+        doc.text(`${label}:`, 25, y);
+        doc.setFont("helvetica", "bold");
+        doc.text(valor || "__________", 75, y);
+        doc.setFont("helvetica", "normal");
+        y += 15;
+      });
+
+      doc.setFontSize(10);
+      doc.text("Gerado automaticamente pelo sistema", 105, 280, { align: "center" });
+
+      doc.save("Cadastro_Usuario.pdf");
+    }
+  </script>
+</body>
+</html>

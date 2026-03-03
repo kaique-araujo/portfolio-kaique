@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="pt-br" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>ForMe</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <!-- Gradient background layers -->
+  <div class="bg">
+    <div class="blob b1"></div>
+    <div class="blob b2"></div>
+    <div class="grid"></div>
+  </div>
+
+  <!-- Top-right accessibility controls -->
+  <header class="topbar" aria-label="Acessibilidades">
+    <div class="search right">
+  <svg class="search-icon" viewBox="0 0 24 24">
+    <path d="M21 21l-4.3-4.3m1.3-5.2a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+      stroke="currentColor"
+      stroke-width="2"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"/>
+  </svg>
+
+  <input
+    id="searchInput"
+    type="search"
+    placeholder="Pesquisar mais sobre..."
+        aria-label="Pesquisar por palavras-chave"
+      />
+    </div>
+
+    <div class="toggles">
+      <button class="icon-btn" id="btnTheme" aria-label="Alternar modo noturno">
+        🌙
+      </button>
+
+      <button class="icon-btn" id="btnLang" aria-label="Alterar idioma">
+        PT
+      </button>
+    </div>
+  </header>
+
+  <!-- Right hidden navbar (reveals on hover) -->
+  <aside class="nav-rail" aria-label="Menu lateral">
+    <nav class="nav" aria-label="Navegação principal">
+      <a href="#home" class="nav-item" data-i18n="nav_home" title="Home">🏠 <span>Home</span></a>
+      <a href="#cv" class="nav-item" data-i18n="nav_cv" title="Currículo">📄 <span>Currículo</span></a>
+      <a href="#projects" class="nav-item" data-i18n="nav_projects" title="Projetos">🧩 <span>Projetos</span></a>
+      <a href="#studies" class="nav-item" data-i18n="nav_studies" title="Estudos/Pesquisas">📚 <span>Estudos</span></a>
+      <a href="#contact" class="nav-item" data-i18n="nav_contact" title="Contato">✉️ <span>Contato</span></a>
+    </nav>
+  </aside>
+
+  <main class="container">
+    <!-- HOME -->
+    <section id="home" class="section hero" data-search-scope="home">
+      <div class="hero-left">
+        <div class="avatar-wrap" aria-label="Foto do Kaique">
+          <!-- Troque src pela sua foto -->
+          <img class="avatar" src="perfil.png" alt="Foto do Kaique" onerror="this.style.display='none'; this.parentElement.classList.add('avatar-fallback')"/>
+          <div class="avatar-fallback-inner">
+            <div class="initials">K</div>
+            <small data-i18n="avatar_hint">Adicione sua foto em /assets</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <h1 class="title">
+          <strong>Kaique de Araújo</strong>
+        </h1>
+
+        <p class="subtitle" data-i18n="subtitle">
+          Estudante de Análise e Desenvolvimento de Sistemas, pesquisador e amante da vida. Aprecio a tecnologia e sua inserção na sociedade. 20 anos, São Paulo - SP
+          
+        </p>
+
+        <div class="pill-row" aria-label="Destaques rápidos">
+          <span class="pill" data-i18n="pill_1">Front-end</span>
+          <span class="pill" data-i18n="pill_2">Banco de Dados</span>
+          <span class="pill" data-i18n="pill_3">Projetos acadêmicos</span>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn primary" href="#projects" data-i18n="cta_projects">Ver projetos</a>
+          <a class="btn ghost" href="#cv" data-i18n="cta_cv">Ver currículo</a>
+        </div>
+
+        <div class="featured">
+          <div class="section-head">
+            <h2 data-i18n="featured_title">Projetos em destaque</h2>
+            <p class="muted" data-i18n="featured_sub">Passe o mouse para pré-visualizar.</p>
+          </div>
+
+          <div class="card-grid">
+            <!-- CARD 1 -->
+            <article class="card project"
+  data-title="Snixel"
+  data-desc="Jogo estilo snake com ranking e evolução — foco em diversão e UI."
+  data-shots="assets/snixel-1.png|assets/snixel-2.png|assets/snixel-3.png"
+  data-tags="web front-end html css"
+  data-demo="assets/games/SNIXEL/indeex.html"
+  tabindex="0">
+
+  <div class="card-media" style="--img:url('assets/char.png')"></div>
+
+  <div class="card-body">
+    <h3>Snixel</h3>
+    <p data-i18n="p1_desc">
+      Jogo estilo snake com ranking e evolução — foco em diversão e UI.
+    </p>
+  </div>
+
+  <button class="card-overlay" data-preview="Snixel">Pré-visualizar</button>
+</article>
+
+            <!-- CARD 2 -->
+            <article class="card project"
+  data-title="Tec Speed"
+  data-desc="Jogo em desenvolvimento inspirado em jogos mobiles com dificuldade progressiva."
+  data-shots="assets/tec-speed-1.png|assets/tec-speed-2.png|assets/tec-speed-3.png"
+  data-tags="web front-end html css"
+  data-demo="assets/games/tec-speed/index.html"
+  tabindex="0">
+
+  <div class="card-media" style="--img:url('assets/tec.jpg')"></div>
+
+  <div class="card-body">
+    <h3>Tec Speed</h3>
+    <p data-i18n="p2_desc">
+      Jogo em desenvolvimento inspirado em jogos mobiles com dificuldade progressiva.
+    </p>
+  </div>
+  
+  <button class="card-overlay" data-preview="Snixel">Pré-visualizar</button>
+            </article>
+
+            <!-- CARD 3 -->
+            <article class="card project"
+  data-title="Analysticalab"
+  data-desc="Portal de captura de dados com estrutura organizada e fluxo simples."
+  data-shots="assets/lab-1.png|assets/lab-3.png"
+  data-tags="web front-end html css"
+  data-demo="assets/games/lab-page/index.html"
+  tabindex="0">
+
+  <div class="card-media" style="--img:url('assets/lab-fundo.jpg')"></div>
+
+  <div class="card-body">
+    <h3>Analysticalab</h3>
+    <p data-i18n="p3_desc">
+      Portal de captura de dados com estrutura organizada e fluxo simples.
+    </p>
+  </div>
+
+   <button class="card-overlay" data-preview="Analysticalab">Pré-visualizar</button>
+            </article>
+    </section>
+
+    <!-- ESTUDOS / PESQUISAS -->
+    <section id="studies" class="section" data-search-scope="studies">
+      <div class="section-head">
+        <h2 data-i18n="studies_title">Estudos / Pesquisas</h2>
+        <p class="muted" data-i18n="studies_sub">Lista completa de anotações e estudos realizados.</p>
+      </div>
+
+    <!-- ESTUDO 1 -->
+      <div class="list-grid">
+        <article class="list-card" data-tags="python sgbd code" data-title="Python em SGBD">
+          <h3 data-i18n="study_a_title">Python em SGBD</h3>
+          <p class="muted" data-i18n="study_a_desc">Funcionamento de um Código Python para analise de política em SGBD.</p>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">SGBD</span><span class="chip">Code</span>
+          </div>
+    <div class="links">
+<div class="downloads">
+  <a href="assets/docs/python-sgbd.pdf" class="link" download>Download</a>
+</div>
+  </article>
+
+     <!-- ESTUDO 2 -->
+        <article class="list-card" data-tags="python syllogism example" data-title="Silogismo">
+          <h3 data-i18n="study_b_title">Silogismo</h3>
+          <p class="muted" data-i18n="study_b_desc">Demonstração de um Silogismo Simples em Python.</p>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">Syllogism</span><span class="chip">Example</span>
+          </div>
+        <div class="links">
+<div class="downloads">
+  <a href="assets/docs/silogismo.ipynb" class="link" download>Download</a>
+</div>
+  </article>
+
+  <!-- ESTUDO 3 -->
+        <article class="list-card" data-tags="model data BD" data-title="Modelagem de Dados">
+          <h3 data-i18n="study_c_title">Modelagem de Dados</h3>
+          <p class="muted" data-i18n="study_c_desc">Fundamentos e aplicação da modelagem de dados em um Banco de Dados.</p>
+          <div class="chips">
+            <span class="chip">Model</span><span class="chip">Data</span><span class="chip">BD</span>
+          </div>
+        <div class="links">
+<div class="downloads">
+  <a href="assets/docs/modelagem.pdf" class="link" download>Download</a>
+  <a href="assets/docs/mdexemplo.ipynb" class="link" download>Exemplo</a>
+</div>
+  </article>
+
+  <!-- ESTUDO 4 -->
+        <article class="list-card" data-tags="sgbd study" data-title="SGBD">
+          <h3 data-i18n="study_d_title">SGBD</h3>
+          <p class="muted" data-i18n="study_d_desc">Estudo sobre a importância de sistemas de gerenciamento de banco de dados. </p>
+          <div class="chips">
+            <span class="chip">SGBD</span><span class="chip">Study</span>
+          </div>
+        <div class="links">
+<div class="downloads">
+  <a href="assets/docs/sgbd-estudo.pdf" class="link" download>Download</a>
+</div>
+  </article>
+
+  <!-- ESTUDO 5 -->
+        <article class="list-card" data-tags="python example" data-title="Tabela verdade">
+          <h3 data-i18n="study_e_title">Tabela Verdade</h3>
+          <p class="muted" data-i18n="study_e_desc">Exemplo de tabela verdade em Python, em um circuito de votação. </p>
+          <div class="chips">
+            <span class="chip">Python</span><span class="chip">Example</span>
+          </div>
+        <div class="links">
+<div class="downloads">
+  <a href="assets/docs/tabelaverdade.ipynb" class="link" download>Download</a>
+</div>
+  </article>
+    </section>
+
+    <!-- PROJETOS -->
+    <section id="projects" class="section" data-search-scope="projects">
+      <div class="section-head">
+        <h2 data-i18n="projects_title">Projetos</h2>
+        <p class="muted" data-i18n="projects_sub">Lista completa dos meus projetos finalizados e em desenvolvimento.</p>
+      </div>
+
+      <div class="list-grid" id="projectsList">
+
+  <!-- PROJETO 1 -->
+  <article class="list-card" data-tags="jogo javascript ranking" data-title="Snixel">
+    <h3>Snixel</h3>
+   <p data-i18n="p1_desc">Jogo estilo snake com ranking e evolução — foco em diversão e UI.</p>
+    <div class="chips">
+      <span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Game</span>
+    </div>
+    <div class="links">
+      <a href="assets/games/SNIXEL/indeex.html" class="link" target="_blank" rel="noopener noreferrer">Ver</a>
+    </div>
+  </article>
+
+  <!-- PROJETO 2 -->
+  <article class="list-card" data-tags="sistema analise dados" data-title="Tec Speed">
+    <h3>Tec Speed</h3>
+    <p data-i18n="p2_desc">Jogo em desenvolvimento inspirado em jogos mobiles com dificuldade progressiva.</p>
+    <div class="chips">
+      <span class="chip">JavaScript</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Game</span>
+    </div>
+    <div class="links">
+      <a href="assets/games/tec-speed/index.html" class="link" target="_blank" rel="noopener noreferrer">Ver</a>
+    </div>
+  </article>
+
+  <!-- PROJETO 3 -->
+  <article class="list-card" data-tags="laboratorio exames banco" data-title="AnalysticaLab">
+    <h3>AnalysticaLab</h3>
+    <p data-i18n="p3_desc">Portal de captura de dados com estrutura organizada e fluxo simples.</p>
+    <div class="chips">
+      <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">WebSite</span>
+    </div>
+    <div class="links">
+      <a href="assets/games/lab-page/index.html" class="link" target="_blank" rel="noopener noreferrer">Ver</a>
+    </div>
+  </article>
+
+  <!-- PROJETO 4 -->
+  <article class="list-card" data-tags="seu quarto projeto" data-title="Banco de dados conceitual">
+    <h3>Banco de dados conceitual</h3>
+    <p data-i18n="p4_desc">Estruturação conceitual de um banco de dados, com documentação e dicionário de dados.</p>
+    <div class="chips">
+      <span class="chip">BD</span><span class="chip">Concept</span><span class="chip">Data</span>
+    </div>
+    <div class="links">
+<div class="downloads">
+  <a href="assets/docs/der.docx" class="link" download>DER</a>
+  <a href="assets/docs/dicionario.xlsx" class="link" download>Dicionário</a>
+  <a href="assets/docs/modelo.pdf" class="link" download>Modelo Lógico</a>
+</div>
+  </article>
+
+</div>
+    </section>
+
+
+<!-- CURRÍCULO (sem abrir nova guia) -->
+    <section id="cv" class="section" data-search-scope="cv">
+  <div class="section-head">
+    <h2 data-i18n="cv_title">Currículo</h2>
+    <p class="muted" data-i18n="cv_sub"></p>
+  </div>
+
+  <div class="cv-wrap">
+    <div class="cv-actions">
+      <a class="btn ghost" id="cvDownload" href="cv.pdf" download="Curriculo-Kaique.pdf" data-i18n="cv_download">
+        Baixar PDF
+      </a>
+    </div>
+
+    <div class="cv-viewer" role="region" aria-label="Visualização do currículo">
+      <iframe id="cvFrame" title="Currículo (PDF)" src="cv.pdf" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+    <!-- CONTATO (rodapé) -->
+    <footer id="contact" class="section footer" data-search-scope="contact">
+      <div class="section-head">
+        <h2 data-i18n="contact_title">Contato</h2>
+        <p class="muted" data-i18n="contact_sub"></p>
+      </div>
+
+      <div class="contact-row">
+        <a class="social" href="https://www.instagram.com/okarapreto/" target="_blank"> 📷 <span>Instagram</span></a>
+        <a class="social" href="https://wa.me/11960584763" target="_blank"> 💬 <span>WhatsApp</span></a>
+        <a class="social" href="#" aria-label="LinkedIn">💼 <span>LinkedIn</span></a>
+        <a class="social" href="https://github.com/kaique-araujo" target="_blank"> 🐙 <span>GitHub</span></a>
+      </div>
+
+      <small class="muted">© <span id="year"></span> Kaique — Portfólio</small>
+    </footer>
+  </main>
+
+  <!-- Preview modal (in-page, no new tab) -->
+  <dialog class="modal" id="previewModal" aria-label="Pré-visualização do projeto">
+  <div class="modal-card">
+    <div class="modal-top">
+      <h3 id="previewTitle">Pré-visualizar</h3>
+      <button class="icon-btn" id="closeModal" aria-label="Fechar">✖</button>
+    </div>
+
+    <div class="modal-body">
+      <div class="gallery">
+        <button class="gallery-nav" id="prevShot" aria-label="Imagem anterior">‹</button>
+
+        <div class="gallery-frame">
+          <img id="previewImage" alt="Screenshot do projeto" />
+          <div class="gallery-count" id="galleryCount">1/1</div>
+        </div>
+
+        <button class="gallery-nav" id="nextShot" aria-label="Próxima imagem">›</button>
+      </div>
+
+      <p class="muted" id="previewText"></p>
+
+      <div class="preview-links" id="previewLinks"></div>
+
+      <div class="modal-actions">
+  <button class="btn ghost" id="modalGoProjects">Ver seção de projetos</button>
+
+  <a class="btn primary" id="btnTestar" target="_blank" style="display:none;">
+     Testar
+  </a>
+
+  
+</div>
+    </div>
+  </div>
+</dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>

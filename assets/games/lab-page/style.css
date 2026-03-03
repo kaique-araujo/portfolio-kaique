@@ -1,0 +1,93 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('lab-fundo.jpg'); /* imagem de fundo */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: rgba(255, 255, 255, 0.92); /* Leve transparência branca */
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+}
+
+.microscope-img {
+    width: 80px;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-size: 26px;
+    color: #005f7f; /* Azul forte */
+    margin-bottom: 25px;
+}
+
+.form-cadastro {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 14px;
+    color: #4f4f4f;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #b0d5e8; /* Azul claro */
+    border-radius: 10px;
+    font-size: 15px;
+    background-color: #f4faff; /* Fundo bem suave */
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    border-color: #007ab8; /* Azul forte */
+    box-shadow: 0 0 5px rgba(0, 122, 184, 0.4);
+    outline: none;
+}
+
+button {
+    padding: 12px;
+    background-color: #007ab8; /* Azul forte */
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #005f7f; /* Azul mais escuro */
+    transform: translateY(-2px);
+}

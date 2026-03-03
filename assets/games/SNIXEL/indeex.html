@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Snixel Game</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+    body {
+  background: url(char.png) no-repeat center center fixed;
+  background-size: cover;
+  color: #FFD700;
+  font-family: 'Press Start 2P', monospace;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  margin: 0;
+  padding: 20px;
+}
+    h1 {
+      margin: 20px 0;
+      color: #FFD700;
+      text-shadow: 2px 2px #ff0000, 4px 4px #000;
+      text-align: center;
+    }
+    #gameArea {
+      text-align: center;
+    }
+    #gameCanvas {
+  background: url(chat.png) no-repeat center center;
+  background-size: 100% 100%;
+  display: block;
+  margin: 0 auto;
+  border: 4px solid #FFD700;
+  image-rendering: pixelated;
+}
+
+    #info {
+      margin: 15px;
+      color: #fff;
+    }
+    #info p {
+      font-size: 14px;
+      color: #FFD700;
+      text-shadow: 1px 1px #ff0000;
+    }
+    #ranking {
+      margin-top: 20px;
+    }
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: 450px;
+      color: #fff;
+      font-size: 15px;
+    }
+    td, th {
+      border: 1px solid #FFD700;
+      padding: 5px;
+      text-shadow: 1px 1px #000;
+    }
+    input {
+      padding: 5px;
+      margin-top: 10px;
+      border: 2px solid #FFD700;
+      background: #111;
+      color: #FFD700;
+      font-family: 'Press Start 2P', monospace;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #FFD700;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Press Start 2P', monospace;
+      box-shadow: 2px 2px #ff0000;
+    }
+    button:hover {
+      background: #ff0000;
+      color: #fff;
+    }
+    #instructions {
+      max-width: 300px;
+      color: #fff;
+      font-size: 15px;
+      text-align: left;
+      line-height: 1.6;
+    }
+    #instructions h2 {
+     font-size: 14px;
+      color: #FFD700;
+      margin-bottom: 10px;
+    } 
+    button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #FFD700;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-family: 'Press Start 2P', monospace;
+      box-shadow: 2px 2px #ff0000;
+    }
+    button:hover { background: #ff0000; color: #fff; }
+</style>
+</head>
+<body>
+  <div id="ranking">
+      <h2>Ranking Local</h2>
+      <table id="rankingTable">
+        <tr><th>Posição</th><th>Jogador</th><th>Pontos</th><th>Tempo</th></tr>
+        </table>
+        </div>
+  <div id="gameArea">
+    <h1>SNIXEL</h1>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div id="info">
+      <p>
+        Pontuação: <span id="score">0</span> | 
+        Tempo: <span id="time">0</span>s | 
+        Tamanho: <span id="length">1</span>
+      </p>
+      <input type="text" id="playerName" placeholder="Digite seu nome">
+      <br>
+      <button onclick="startGame()">Iniciar Jogo</button>
+      </div>
+      </div>
+  </div>
+
+  <div id="instructions">
+    <h2>Instruções</h2>
+    <p>Setas ou WASD para movimentar a cobra.</p>
+    <p>Quadrado vermelho: aumenta pontos e tamanho.</p>
+    <p>Quadrado azul: reduz o tamanho da cobra.</p>
+    <p>A velocidade aumenta gradualmente..</p>
+    <p>Objetivo: sobreviver o máximo de tempo e pontuar.</p>
+  </div>
+
+  <script>
+    const canvas = document.getElementById("gameCanvas");
+    const ctx = canvas.getContext("2d");
+    const scoreEl = document.getElementById("score");
+    const timeEl = document.getElementById("time");
+    const lengthEl = document.getElementById("length");
+    const rankingTable = document.getElementById("rankingTable");
+    const playerNameInput = document.getElementById("playerName");
+
+    const box = 20;
+    let snake, direction, food, score, game, currentPlayer, gameSpeed;
+    let particles = [];
+    let blueFood = null;
+    let blueFoodTimer = 0;
+    let startTime, timerInterval;
+
+    function startGame() {
+      currentPlayer = playerNameInput.value.trim() || "Anônimo";
+      snake = [{x: 9*box, y: 10*box}];
+      direction = "RIGHT";
+      food = randomFood();
+      blueFood = null;
+      score = 0;
+      gameSpeed = 150;
+      scoreEl.textContent = score;
+      lengthEl.textContent = snake.length;
+      clearInterval(game);
+      clearInterval(timerInterval);
+
+      startTime = Date.now();
+      timerInterval = setInterval(updateTime, 1000);
+
+      game = setInterval(draw, gameSpeed);
+      draw();
+    }
+
+    function updateTime() {
+      let elapsed = Math.floor((Date.now() - startTime) / 1000);
+      timeEl.textContent = elapsed;
+
+      // aumenta a velocidade a cada 10s
+      if (elapsed % 10 === 0 && gameSpeed > 50) {
+        gameSpeed -= 10;
+        clearInterval(game);
+        game = setInterval(draw, gameSpeed);
+      }
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if ((e.key === "ArrowLeft" || e.key === "a") && direction !== "RIGHT") direction = "LEFT";
+      if ((e.key === "ArrowUp" || e.key === "w") && direction !== "DOWN") direction = "UP";
+      if ((e.key === "ArrowRight" || e.key === "d") && direction !== "LEFT") direction = "RIGHT";
+      if ((e.key === "ArrowDown" || e.key === "s") && direction !== "UP") direction = "DOWN";
+    });
+
+    function randomFood() {
+      return {
+        x: Math.floor(Math.random() * (canvas.width / box)) * box,
+        y: Math.floor(Math.random() * (canvas.height / box)) * box
+      };
+    }
+
+    function draw() {
+      ctx.fillStyle = "#000";
+      ctx.fillRect(0,0,400,400);
+
+      updateParticles();
+
+      // cobra
+      for(let i=0; i<snake.length; i++){
+        ctx.fillStyle = (i === 0)? "#00FF00" : "#32CD32";
+        ctx.fillRect(snake[i].x, snake[i].y, box, box);
+        ctx.strokeStyle = "#111";
+        ctx.strokeRect(snake[i].x, snake[i].y, box, box);
+      }
+
+      // comida vermelha
+      ctx.fillStyle = "red";
+      ctx.fillRect(food.x, food.y, box, box);
+
+      // comida azul
+      if (blueFood) {
+        ctx.fillStyle = "blue";
+        ctx.fillRect(blueFood.x, blueFood.y, box, box);
+        blueFoodTimer--;
+        if (blueFoodTimer <= 0) {
+          blueFood = null;
+        }
+      } else if (Math.random() < 0.01) { 
+        blueFood = randomFood();
+        blueFoodTimer = 100;
+      }
+
+      let snakeX = snake[0].x;
+      let snakeY = snake[0].y;
+
+      if(direction === "LEFT") snakeX -= box;
+      if(direction === "UP") snakeY -= box;
+      if(direction === "RIGHT") snakeX += box;
+      if(direction === "DOWN") snakeY += box;
+
+      // teletransporte
+      if(snakeX < 0) snakeX = canvas.width - box;
+      if(snakeY < 0) snakeY = canvas.height - box;
+      if(snakeX >= canvas.width) snakeX = 0;
+      if(snakeY >= canvas.height) snakeY = 0;
+
+      // comer vermelho
+      if(snakeX === food.x && snakeY === food.y){
+        score++;
+        scoreEl.textContent = score;
+        spawnParticles(food.x, food.y, "red");
+        food = randomFood();
+        // cresce naturalmente (não faz pop)
+      } 
+      // comer azul
+      else if (blueFood && snakeX === blueFood.x && snakeY === blueFood.y){
+        spawnParticles(blueFood.x, blueFood.y, "blue");
+        blueFood = null;
+        if (snake.length > 1) {
+          snake.pop(); // realmente diminui
+        }
+        snake.pop(); // garante redução de mais 1
+      } 
+      else {
+        snake.pop();
+      }
+
+      let newHead = {x: snakeX, y: snakeY};
+
+      if(collision(newHead, snake)){
+        clearInterval(game);
+        clearInterval(timerInterval);
+        saveScore(currentPlayer, score, timeEl.textContent);
+        alert("Game Over! Pontos: " + score + " | Tempo: " + timeEl.textContent + "s");
+      }
+
+      snake.unshift(newHead);
+      lengthEl.textContent = snake.length;
+    }
+
+    function collision(head, array){
+      for(let i=0; i<array.length; i++){
+        if(head.x === array[i].x && head.y === array[i].y){
+          return true;
+        }
+      }
+      return false;
+    }
+
+    // partículas
+    function spawnParticles(x, y, color) {
+      for(let i=0; i<15; i++){
+        particles.push({
+          x: x + box/2,
+          y: y + box/2,
+          dx: (Math.random() - 0.5) * 4,
+          dy: (Math.random() - 0.5) * 4,
+          life: 30,
+          color: color
+        });
+      }
+    }
+
+    function updateParticles() {
+      for(let i=0; i<particles.length; i++){
+        let p = particles[i];
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, 4, 4);
+        p.x += p.dx;
+        p.y += p.dy;
+        p.life--;
+        if(p.life <= 0){
+          particles.splice(i,1);
+          i--;
+        }
+      }
+    }
+
+    function saveScore(name, score, time) {
+      let scores = JSON.parse(localStorage.getItem("snakeScores")) || [];
+      scores.push({name, score, time});
+      scores.sort((a,b) => b.score - a.score || b.time - a.time);
+      scores = scores.slice(0,5);
+      localStorage.setItem("snakeScores", JSON.stringify(scores));
+      showRanking();
+    }
+
+    function showRanking() {
+      let scores = JSON.parse(localStorage.getItem("snakeScores")) || [];
+      rankingTable.innerHTML = "<tr><th>Posição</th><th>Jogador</th><th>Pontos</th><th>Tempo</th></tr>";
+      scores.forEach((s, i) => {
+        rankingTable.innerHTML += `<tr><td>${i+1}</td><td>${s.name}</td><td>${s.score}</td><td>${s.time}s</td></tr>`;
+      });
+    }
+
+    showRanking();
+  </script>
+</body>
+</html>

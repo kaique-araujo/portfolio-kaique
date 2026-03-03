@@ -1,0 +1,111 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url('lab-fundo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* CONTAINER */
+
+.container {
+    width: 100%;
+    max-width: 600px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0, 95, 127, 0.15);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* ANIMAÇÃO SUAVE */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* TÍTULO */
+
+h1 {
+    text-align: center;
+    color: #005f7f;
+    margin-bottom: 30px;
+}
+
+/* FORM */
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+label {
+    font-size: 14px;
+    color: #555;
+    font-weight: 600;
+}
+
+/* INPUT */
+
+input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #b0d5e8;
+    border-radius: 12px;
+    font-size: 15px;
+    background-color: #f4faff;
+    transition: 0.3s;
+}
+
+input:focus {
+    border-color: #007ab8;
+    box-shadow: 0 0 6px rgba(0, 122, 184, 0.3);
+    outline: none;
+}
+
+/* BOTÃO */
+
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    background: linear-gradient(135deg, #007ab8, #005f7f);
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-weight: bold;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 122, 184, 0.4);
+}
+
+/* DIVISOR MÉDICO */
+
+.form-group input::placeholder {
+    color: #9bbccc;
+}

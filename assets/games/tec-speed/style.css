@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: url(wallpaper.jpg);
+  color: #fff;
+  text-align: center;
+  overflow: hidden;
+}
+
+h1, h2 {
+  color: #ffffff;
+  text-shadow: 0 0 10px rgb(0, 0, 0);
+}
+
+button {
+  background: linear-gradient(45deg, #6a0dad, #009dff);
+  border: none;
+  padding: 10px 20px;
+  margin: 10px;
+  font-size: 18px;
+  color: #fff;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgb(0, 0, 0);
+}
+
+#menu, #ranking, #gameUI, #gameOver {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.hidden {
+  display: none;
+}
+
+#gameCanvas {
+  border: 2px solid #6ff;
+  background: #111122;
+  display: block;
+  margin: 0 auto;
+}
+
+#pauseBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 20;
+}
+
+#gameOver h2 {
+  font-size: 3em;
+  color: #ff4d6d;
+  text-shadow: 0 0 20px #ff005c;
+}
+
+h2 {
+  font-family: 'Orbitron', sans-serif; /* fonte gamer futurista */
+  font-size: 80px;
+  letter-spacing: 3px;
+  color: #ffffff;
+  text-shadow: 0 0 10px #6ff, 0 0 20px #a566ff, 0 0 40px #6ff;
+  animation: glow 2s infinite alternate;
+  margin-bottom: 30px;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 15px #6ff, 0 0 30px #a566ff;
+  }
+  to {
+    text-shadow: 0 0 25px #6ff, 0 0 50px #a566ff, 0 0 80px #6ff;
+  }
+}
+

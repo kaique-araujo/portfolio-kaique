@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Laboratório</title>
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logotype-semfundo.png" alt="Microscópio" class="microscope-img">
+        </header>
+
+        <form action="#" method="POST" class="form-cadastro" onsubmit="return false;">
+            <div class="form-group">
+                <label for="login">Login:</label>
+                <input type="text" id="login" name="login" placeholder="Digite seu login" required>
+            </div>
+
+            <div class="form-group" style="position: relative;">
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required style="padding-right: 40px;">
+                <i id="toggleSenha" class="fa-solid fa-eye-slash" 
+                   onclick="toggleSenha()" 
+                   style="position: absolute; top: 38px; right: 10px; cursor: pointer;"></i>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn-login" onclick="fazerLogin()">Login</button>
+                <button type="button" class="btn-cadastrar" onclick="window.location.href='cadastro.html'">Cadastrar</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function toggleSenha() {
+            const input = document.getElementById("senha");
+            const icon = document.getElementById("toggleSenha");
+
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+            } else {
+                input.type = "password";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+            }
+        }
+
+        function fazerLogin() {
+            const login = document.getElementById("login").value;
+            const senha = document.getElementById("senha").value;
+
+            if (login === "admin" && senha === "1234") {
+                alert("Login realizado com sucesso!");
+                window.location.href = "pagina-de-login.html";
+            } else {
+                alert("Login ou senha incorretos. Tente novamente.");
+            }
+        }
+    </script>
+</body>
+
+</html>
