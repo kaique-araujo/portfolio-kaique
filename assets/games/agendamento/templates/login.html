@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Entrar no Sistema</title>
+    <style>
+        body {
+            background: #1f1f2e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial;
+            color: white;
+        }
+
+        .box {
+            background: #2c2c44;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            width: 300px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            background: #5b6cff;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Bem-vindo</h2>
+    <p>Digite seu nome para entrar</p>
+
+    <form method="POST">
+        <input type="text" name="nome" placeholder="Seu nome" required>
+        <button type="submit">Entrar</button>
+    </form>
+</div>
+
+</body>
+</html>

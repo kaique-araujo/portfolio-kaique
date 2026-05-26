@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <title>Sistema de Agendamento</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- SIDEBAR FILTROS (REFATORADA) -->
+    <div class="sidebar">
+
+        <h2>Filtros</h2>
+
+        <form method="GET" action="/">
+
+            <input type="text" name="filtro" placeholder="Pesquisar nome">
+
+            <input type="date" name="data">
+
+            <button type="submit">Aplicar filtros</button>
+
+        </form>
+
+        <!-- BOTÃO HISTÓRICO NA SIDEBAR -->
+        <button class="history-btn" onclick="toggleLogs()">
+            Ver histórico de movimentações
+        </button>
+
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+   <div class="main">
+
+    <h1>Sistema de Agendamento</h1>
+
+    <div class="topbar">
+    <p>Usuário logado: <strong>{{ usuario }}</strong></p>
+
+    <a href="/logout" class="logout-btn">Sair</a>
+</div>
+
+    <h2>Organize seus compromissos</h2>
+
+    <!-- 📊 DASHBOARD (NOVO) -->
+    <div class="dashboard">
+
+        <div class="card">
+            <h3>Total</h3>
+            <p>{{ total }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Hoje</h3>
+            <p>{{ hoje }}</p>
+        </div>
+
+        <div class="card">
+            <h3>Próximo</h3>
+            <p>
+                {% if proximo %}
+                    {{ proximo.nome }} - {{ proximo.horario }}
+                {% else %}
+                    Nenhum
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Último</h3>
+            <p>
+                {% if ultimo %}
+                    {{ ultimo.nome }}
+                {% else %}
+                    Nenhum
+                {% endif %}
+            </p>
+        </div>
+
+    </div>
+
+    <!-- FORM -->
+    <form action="/add" method="POST">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <input type="date" name="data" required>
+        <input type="time" name="horario" required>
+        <button type="submit">Criar agendamento</button>
+    </form>
+
+    <!-- LISTA -->
+    <h2>Agendamentos</h2>
+
+    <ul>
+        {% for ag in agendamentos %}
+        <li>
+            <div class="info">
+                {{ ag.nome }} - {{ ag.data }} às {{ ag.horario }}
+            </div>
+
+            <a href="/delete/{{ ag.id }}">Excluir</a>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <!-- LOGS -->
+    <div class="logs" id="logs" style="display:none;">
+        {% for log in logs %}
+        <div class="log">
+            [{{ log.data_hora }}] {{ log.acao }} - {{ log.descricao }}
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+</div>
+
+<script>
+function toggleLogs() {
+    const logs = document.getElementById("logs");
+    logs.style.display = logs.style.display === "none" ? "block" : "none";
+}
+</script>
+
+</body>
+</html>
